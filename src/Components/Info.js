@@ -1,7 +1,7 @@
 import React from "react";
 
 const Info = () => {
-    return (<div />);
-}
+  return <div />;
+};
 
 export default Info;
