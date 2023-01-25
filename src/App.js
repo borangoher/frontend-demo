@@ -12,8 +12,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 function App() {
-  const [isLoggedIn, setLogin] = useState(false);
-  const value = { isLoggedIn, setLogin };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const value = { isLoggedIn, setIsLoggedIn };
 
   return (
     <div>

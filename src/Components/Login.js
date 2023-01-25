@@ -12,13 +12,13 @@ import {
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { isLoggedIn, setLogin } = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = () => setLogin(true);
+  const onSubmit = () => setIsLoggedIn(true);
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -37,7 +37,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => setLogin(false)}
+            onClick={() => setIsLoggedIn(false)}
           >
             Log Out
           </Button>
