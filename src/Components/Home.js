@@ -4,33 +4,7 @@ import { React, useContext } from "react";
 import LoginContext from "./LoginContext";
 
 const Home = () => {
-  const { login } = useContext(LoginContext);
-  var content = <div />;
-  if (login) {
-    content = [
-      <Typography align="center" variant="h2">
-        Welcome to Payment Service!
-      </Typography>,
-      <Typography align="center" variant="h5">
-        Welcome to Payment Service. You can handle your payments through this
-        website. You are currently logged in.
-      </Typography>,
-    ];
-  } else {
-    content = [
-      <Typography align="center" variant="h2">
-        Welcome to Payment Service!
-      </Typography>,
-      <Typography align="center" variant="h5">
-        Welcome to Payment Service. You can handle your payments through this
-        website. Please log in to continue.
-      </Typography>,
-      <Button size="large" variant="contained" component={Link} to="/login">
-        {" "}
-        Log In
-      </Button>,
-    ];
-  }
+  const { isLoggedIn } = useContext(LoginContext);
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -42,7 +16,34 @@ const Home = () => {
         alignItems="center"
         minHeight="90vh"
       >
-        {content}
+        {isLoggedIn
+          ? [
+              <Typography align="center" variant="h2">
+                Welcome to Payment Service!
+              </Typography>,
+              <Typography align="center" variant="h5">
+                Welcome to Payment Service. You can handle your payments through
+                this website. You are currently logged in.
+              </Typography>,
+            ]
+          : [
+              <Typography align="center" variant="h2">
+                Welcome to Payment Service!
+              </Typography>,
+              <Typography align="center" variant="h5">
+                Welcome to Payment Service. You can handle your payments through
+                this website. Please log in to continue.
+              </Typography>,
+              <Button
+                size="large"
+                variant="contained"
+                component={Link}
+                to="/login"
+              >
+                {" "}
+                Log In
+              </Button>,
+            ]}
       </Box>
     </Container>
   );

@@ -4,26 +4,7 @@ import LoginContext from "./LoginContext";
 import { Container, Box, TextField, Button, Typography } from "@mui/material";
 
 const Login = () => {
-  const { login, setLogin } = useContext(LoginContext);
-  var content = <div />;
-  if (login) {
-    content = [
-      <Typography align="center" variant="h5">
-        You are currently logged in. Would you like to log out?
-      </Typography>,
-      <Button type="submit" variant="contained" onClick={() => setLogin(false)}>
-        Log Out
-      </Button>,
-    ];
-  } else {
-    content = [
-      <TextField required type="text" label="Username" />,
-      <TextField required type="password" label="Password" />,
-      <Button type="submit" variant="contained" onClick={() => setLogin(true)}>
-        Log In
-      </Button>,
-    ];
-  }
+  const { isLoggedIn, setLogin } = useContext(LoginContext);
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -35,7 +16,30 @@ const Login = () => {
         alignItems="center"
         minHeight="90vh"
       >
-        {content}
+        {isLoggedIn
+          ? [
+              <Typography align="center" variant="h5">
+                You are currently logged in. Would you like to log out?
+              </Typography>,
+              <Button
+                type="submit"
+                variant="contained"
+                onClick={() => setLogin(false)}
+              >
+                Log Out
+              </Button>,
+            ]
+          : [
+              <TextField required type="text" label="Username" />,
+              <TextField required type="password" label="Password" />,
+              <Button
+                type="submit"
+                variant="contained"
+                onClick={() => setLogin(true)}
+              >
+                Log In
+              </Button>,
+            ]}
       </Box>
     </Container>
   );
