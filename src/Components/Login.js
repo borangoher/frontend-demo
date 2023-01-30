@@ -10,6 +10,19 @@ import {
   Alert,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  username: yup
+    .string()
+    .min(4, "Username should be between 4 and 20 characters")
+    .max(20, "Username should be between 4 and 20 characters"),
+  password: yup
+    .string()
+    .min(8, "Password should be between 8 and 16 characters")
+    .max(16, "Password should be between 8 and 16 characters"),
+});
 
 const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
@@ -17,7 +30,9 @@ const Login = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const onSubmit = () => setIsLoggedIn(true);
 
   return (
@@ -53,34 +68,22 @@ const Login = () => {
             minHeight="90vh"
           >
             <TextField
-              {...register("username", {
-                required: true,
-                minLength: 4,
-                maxLength: 20,
-              })}
+              {...register("username")}
               required
               type="text"
               label="Username"
             />
             {errors.username && (
-              <Alert severity="error">
-                You must enter a username between 4 and 20 characters!
-              </Alert>
+              <Alert severity="error">{errors.username.message}</Alert>
             )}
             <TextField
-              {...register("password", {
-                required: true,
-                minLength: 8,
-                maxLength: 16,
-              })}
+              {...register("password")}
               required
               type="password"
               label="Password"
             />
             {errors.password && (
-              <Alert severity="error">
-                You must enter a password between 8 and 16 characters!
-              </Alert>
+              <Alert severity="error">{errors.password.message}</Alert>
             )}
             <Button type="submit" variant="contained">
               Log In
