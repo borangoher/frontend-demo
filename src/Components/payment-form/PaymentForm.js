@@ -1,5 +1,5 @@
 import { React, useContext } from "react";
-import LoginContext from "./LoginContext";
+import LoginContext from "../LoginContext";
 import {
   Container,
   Box,
@@ -19,52 +19,7 @@ import {
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const schema = yup.object({
-  cardholderName: yup
-    .string()
-    .min(2, "Cardholder name must at least contain 2 characters")
-    .required("This field is required"),
-  cardNumber: yup
-    .number("Card number must be a number")
-    .positive()
-    .test(
-      "len",
-      "Card number must be exactly 16 digits",
-      (val) => val && val.toString().length === 16
-    )
-    .required("This field is required"),
-  expiryDate: yup
-    .date()
-    .min(new Date(), "Expiry date must be a future date")
-    .required(),
-  securityNumber: yup
-    .number("Security number must be a number")
-    .positive()
-    .test(
-      "len",
-      "Security number must be exactly 3 digits",
-      (val) => val && val.toString().length === 3
-    )
-    .required("This field is required"),
-  accountNumber: yup
-    .number("Account number must be a number")
-    .positive()
-    .test(
-      "len",
-      "Card number must be exactly 10 digits",
-      (val) => val && val.toString().length === 10
-    )
-    .required("This field is required"),
-  amount: yup
-    .number("Amount to transfer must be a number")
-    .positive()
-    .max(25000, "You can transfer no more than 25000 in a single transaction"),
-  displaySenderName: yup.bool(),
-  useService: yup.bool(),
-  transferTime: yup.string("Please select one of the options"),
-});
+import schema from "./paymentForm.validation";
 
 const PaymentForm = () => {
   const { isLoggedIn } = useContext(LoginContext);
@@ -180,6 +135,9 @@ const PaymentForm = () => {
                   control={<Checkbox {...register("useService")} />}
                   label="Use SERVICE for the transfer"
                 />
+                {errors.useService && (
+                  <Alert severity="error">{errors.useService.message}</Alert>
+                )}
               </FormGroup>
               <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">

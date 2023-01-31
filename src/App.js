@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
-import Navbar from "./Components/Navbar.js";
-import Home from "./Components/Home.js";
-import Login from "./Components/Login.js";
-import PaymentForm from "./Components/PaymentForm.js";
-import Info from "./Components/Info.js";
-import LoginContext from "./Components/LoginContext.js";
+import Navbar from "./components/Navbar.js";
+import Home from "./components/Home.js";
+import Login from "./components/Login.js";
+import PaymentForm from "./components/payment-form/PaymentForm.js";
+import Info from "./components/Info.js";
+import LoginContext from "./components/LoginContext.js";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
