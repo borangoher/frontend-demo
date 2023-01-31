@@ -3,7 +3,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar.js";
 import Home from "./components/Home.js";
 import Login from "./components/login/Login.js";
-import PaymentForm from "./components/PaymentForm.js";
+import PaymentForm from "./components/payment-form/PaymentForm.js";
 import Info from "./components/Info.js";
 import LoginContext from "./components/LoginContext.js";
 import "@fontsource/roboto/300.css";
