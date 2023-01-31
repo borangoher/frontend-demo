@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import LoginContext from "./LoginContext";
+import LoginContext from "../LoginContext";
 import {
   Container,
   Box,
@@ -11,18 +11,8 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const schema = yup.object({
-  username: yup
-    .string()
-    .min(4, "Username should be between 4 and 20 characters")
-    .max(20, "Username should be between 4 and 20 characters"),
-  password: yup
-    .string()
-    .min(8, "Password should be between 8 and 16 characters")
-    .max(16, "Password should be between 8 and 16 characters"),
-});
+import schema from "./Login.validation";
+import { loginDefaultValues } from "./Login.constant";
 
 const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
@@ -32,6 +22,7 @@ const Login = () => {
     handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: loginDefaultValues,
   });
   const onSubmit = () => setIsLoggedIn(true);
 
