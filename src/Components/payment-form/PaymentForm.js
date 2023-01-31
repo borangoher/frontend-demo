@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./paymentForm.validation";
+import { paymentFormDefaultValues } from "./paymentForm.constant";
 
 const PaymentForm = () => {
   const { isLoggedIn } = useContext(LoginContext);
@@ -30,6 +31,7 @@ const PaymentForm = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: paymentFormDefaultValues,
   });
   const onSubmit = (data) => console.log(data);
 
@@ -143,7 +145,7 @@ const PaymentForm = () => {
                 <FormLabel id="demo-radio-buttons-group-label">
                   Execute transfer
                 </FormLabel>
-                <RadioGroup name="radio-buttons-group" row defaultValue={"now"}>
+                <RadioGroup name="radio-buttons-group" row>
                   <FormControlLabel
                     value="now"
                     control={<Radio {...register("transferTime")} />}
