@@ -9,7 +9,7 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./Login.validation";
 import { loginDefaultValues } from "./Login.constant";
@@ -17,7 +17,7 @@ import { loginDefaultValues } from "./Login.constant";
 const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const {
-    register,
+    control,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -58,20 +58,36 @@ const Login = () => {
             alignItems="center"
             minHeight="90vh"
           >
-            <TextField
-              {...register("username")}
-              required
-              type="text"
-              label="Username"
+            <Controller
+              control={control}
+              name="username"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <TextField
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  selected={value}
+                  required
+                  type="text"
+                  label="Username"
+                />
+              )}
             />
             {errors.username && (
               <Alert severity="error">{errors.username.message}</Alert>
             )}
-            <TextField
-              {...register("password")}
-              required
-              type="password"
-              label="Password"
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <TextField
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  selected={value}
+                  required
+                  type="text"
+                  label="Password"
+                />
+              )}
             />
             {errors.password && (
               <Alert severity="error">{errors.password.message}</Alert>
