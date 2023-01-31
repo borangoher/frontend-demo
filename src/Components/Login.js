@@ -1,6 +1,4 @@
 import React from "react";
-import { useContext } from "react";
-import LoginContext from "./LoginContext";
 import {
   Container,
   Box,
@@ -10,15 +8,19 @@ import {
   Alert,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useLogin } from "./LoginContext";
 
 const Login = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+  const {
+    state: { isLoggedIn },
+  } = useLogin();
+  const { dispatch } = useLogin();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = () => setIsLoggedIn(true);
+  const onSubmit = () => dispatch({ type: "log in" });
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -37,7 +39,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => setIsLoggedIn(false)}
+            onClick={() => dispatch({ type: "log out" })}
           >
             Log Out
           </Button>

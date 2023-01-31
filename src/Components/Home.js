@@ -1,10 +1,12 @@
 import { Button, Container, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import { React, useContext } from "react";
-import LoginContext from "./LoginContext";
+import { React } from "react";
+import { useLogin } from "./LoginContext";
 
 const Home = () => {
-  const { isLoggedIn } = useContext(LoginContext);
+  const {
+    state: { isLoggedIn },
+  } = useLogin();
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>

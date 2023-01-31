@@ -1,5 +1,5 @@
-import { React, useContext } from "react";
-import LoginContext from "../LoginContext";
+import { React } from "react";
+import { useLogin } from "../LoginContext";
 import {
   Container,
   Box,
@@ -23,7 +23,9 @@ import schema from "./paymentForm.validation";
 import { paymentFormDefaultValues } from "./paymentForm.constant";
 
 const PaymentForm = () => {
-  const { isLoggedIn } = useContext(LoginContext);
+  const {
+    state: { isLoggedIn },
+  } = useLogin();
 
   const {
     handleSubmit,
