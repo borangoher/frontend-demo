@@ -17,7 +17,7 @@ import {
   Alert,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./paymentForm.validation";
 import { paymentFormDefaultValues } from "./paymentForm.constant";
@@ -26,9 +26,9 @@ const PaymentForm = () => {
   const { isLoggedIn } = useContext(LoginContext);
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: paymentFormDefaultValues,
@@ -51,11 +51,19 @@ const PaymentForm = () => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   {" "}
-                  <TextField
-                    {...register("cardholderName")}
-                    required
-                    type="text"
-                    label="Cardholder Name"
+                  <Controller
+                    control={control}
+                    name="cardholderName"
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                      <TextField
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                        required
+                        type="text"
+                        label="Cardholder Name"
+                      />
+                    )}
                   />
                   {errors.cardholderName && (
                     <Alert severity="error">
@@ -65,11 +73,19 @@ const PaymentForm = () => {
                 </Grid>
                 <Grid item xs={6}>
                   {" "}
-                  <TextField
-                    {...register("cardNumber")}
-                    required
-                    type="number"
-                    label="Card Number"
+                  <Controller
+                    control={control}
+                    name="cardNumber"
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                      <TextField
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                        required
+                        type="number"
+                        label="Card Number"
+                      />
+                    )}
                   />
                   {errors.cardNumber && (
                     <Alert severity="error">{errors.cardNumber.message}</Alert>
@@ -77,11 +93,19 @@ const PaymentForm = () => {
                 </Grid>
                 <Grid item xs={6}>
                   {" "}
-                  <TextField
-                    {...register("expiryDate")}
-                    required
-                    type="date"
-                    label="Expiry Date  "
+                  <Controller
+                    control={control}
+                    name="expiryDate"
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                      <TextField
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                        required
+                        type="date"
+                        label="Expiry Date"
+                      />
+                    )}
                   />
                   {errors.expiryDate && (
                     <Alert severity="error">{errors.expiryDate.message}</Alert>
@@ -89,11 +113,19 @@ const PaymentForm = () => {
                 </Grid>
                 <Grid item xs={6} justifyContent="center">
                   {" "}
-                  <TextField
-                    {...register("securityNumber")}
-                    required
-                    type="number"
-                    label="Security Number"
+                  <Controller
+                    control={control}
+                    name="securityNumber"
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                      <TextField
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                        required
+                        type="number"
+                        label="Security Number"
+                      />
+                    )}
                   />
                   {errors.securityNumber && (
                     <Alert severity="error">
@@ -103,11 +135,19 @@ const PaymentForm = () => {
                 </Grid>
                 <Grid item xs={6}>
                   {" "}
-                  <TextField
-                    {...register("accountNumber")}
-                    required
-                    type="number"
-                    label="Account Number"
+                  <Controller
+                    control={control}
+                    name="accountNumber"
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                      <TextField
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                        required
+                        type="number"
+                        label="Account Number"
+                      />
+                    )}
                   />
                   {errors.accountNumber && (
                     <Alert severity="error">
@@ -117,11 +157,19 @@ const PaymentForm = () => {
                 </Grid>
                 <Grid item xs={6}>
                   {" "}
-                  <TextField
-                    {...register("amount")}
-                    required
-                    type="number"
-                    label="Amount"
+                  <Controller
+                    control={control}
+                    name="amount"
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                      <TextField
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        selected={value}
+                        required
+                        type="number"
+                        label="Amount"
+                      />
+                    )}
                   />
                   {errors.amount && (
                     <Alert severity="error">{errors.amount.message}</Alert>
@@ -129,13 +177,37 @@ const PaymentForm = () => {
                 </Grid>
               </Grid>
               <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox {...register("displaySenderName")} />}
-                  label="Do not display sender name"
+                <Controller
+                  control={control}
+                  name="displaySenderName"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          selected={value}
+                        />
+                      }
+                      label="Do not display sender name"
+                    />
+                  )}
                 />
-                <FormControlLabel
-                  control={<Checkbox {...register("useService")} />}
-                  label="Use SERVICE for the transfer"
+                <Controller
+                  control={control}
+                  name="useService"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          selected={value}
+                        />
+                      }
+                      label="Use SERVICE for transfer"
+                    />
+                  )}
                 />
                 {errors.useService && (
                   <Alert severity="error">{errors.useService.message}</Alert>
@@ -145,18 +217,30 @@ const PaymentForm = () => {
                 <FormLabel id="demo-radio-buttons-group-label">
                   Execute transfer
                 </FormLabel>
-                <RadioGroup name="radio-buttons-group" row>
-                  <FormControlLabel
-                    value="now"
-                    control={<Radio {...register("transferTime")} />}
-                    label="Now (extra fees may be incurred)"
-                  />
-                  <FormControlLabel
-                    value="tomorrow"
-                    control={<Radio {...register("transferTime")} />}
-                    label="Tomorrow Morning"
-                  />
-                </RadioGroup>
+                <Controller
+                  control={control}
+                  name="transferTime"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <RadioGroup
+                      name="radio-buttons-group"
+                      row
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      selected={value}
+                    >
+                      <FormControlLabel
+                        value="now"
+                        control={<Radio checked />}
+                        label="Now (extra fees may be incurred)"
+                      />
+                      <FormControlLabel
+                        value="tomorrow"
+                        control={<Radio />}
+                        label="Tomorrow Morning"
+                      />
+                    </RadioGroup>
+                  )}
+                />
               </FormControl>
               <Button type="submit" variant="contained">
                 Make Payment
