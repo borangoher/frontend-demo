@@ -1,8 +1,35 @@
-import { createContext } from "react";
+import { createContext, useReducer, useContext } from "react";
 
-const LoginContext = createContext({
-  isLoggedIn: false,
-  setIsLoggedIn: () => {},
-});
+const LoginContext = createContext();
 
-export default LoginContext;
+function countReducer(state, action) {
+  switch (action.type) {
+    case "log in": {
+      return { isLoggedIn: true };
+    }
+    case "log out": {
+      return { isLoggedIn: false };
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+  }
+}
+
+function LoginProvider({ children }) {
+  const [state, dispatch] = useReducer(countReducer, { isLoggedIn: false });
+  const value = { state, dispatch };
+  return (
+    <LoginContext.Provider value={value}>{children}</LoginContext.Provider>
+  );
+}
+
+function useLogin() {
+  const context = useContext(LoginContext);
+  if (context === undefined) {
+    throw new Error("useCount must be used within a CountProvider");
+  }
+  return context;
+}
+
+export { LoginProvider, useLogin };
