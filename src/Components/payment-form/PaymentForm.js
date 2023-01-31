@@ -50,7 +50,6 @@ const PaymentForm = () => {
             <>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  {" "}
                   <Controller
                     control={control}
                     name="cardholderName"
@@ -69,10 +68,9 @@ const PaymentForm = () => {
                     <Alert severity="error">
                       {errors.cardholderName.message}
                     </Alert>
-                  )}{" "}
+                  )}
                 </Grid>
                 <Grid item xs={6}>
-                  {" "}
                   <Controller
                     control={control}
                     name="cardNumber"
@@ -89,10 +87,9 @@ const PaymentForm = () => {
                   />
                   {errors.cardNumber && (
                     <Alert severity="error">{errors.cardNumber.message}</Alert>
-                  )}{" "}
+                  )}
                 </Grid>
                 <Grid item xs={6}>
-                  {" "}
                   <Controller
                     control={control}
                     name="expiryDate"
@@ -109,10 +106,9 @@ const PaymentForm = () => {
                   />
                   {errors.expiryDate && (
                     <Alert severity="error">{errors.expiryDate.message}</Alert>
-                  )}{" "}
+                  )}
                 </Grid>
                 <Grid item xs={6} justifyContent="center">
-                  {" "}
                   <Controller
                     control={control}
                     name="securityNumber"
@@ -131,10 +127,9 @@ const PaymentForm = () => {
                     <Alert severity="error">
                       {errors.securityNumber.message}
                     </Alert>
-                  )}{" "}
+                  )}
                 </Grid>
                 <Grid item xs={6}>
-                  {" "}
                   <Controller
                     control={control}
                     name="accountNumber"
@@ -153,10 +148,9 @@ const PaymentForm = () => {
                     <Alert severity="error">
                       {errors.accountNumber.message}
                     </Alert>
-                  )}{" "}
+                  )}
                 </Grid>
                 <Grid item xs={6}>
-                  {" "}
                   <Controller
                     control={control}
                     name="amount"
@@ -173,7 +167,7 @@ const PaymentForm = () => {
                   />
                   {errors.amount && (
                     <Alert severity="error">{errors.amount.message}</Alert>
-                  )}{" "}
+                  )}
                 </Grid>
               </Grid>
               <FormGroup>
@@ -258,7 +252,6 @@ const PaymentForm = () => {
                 component={Link}
                 to="/login"
               >
-                {" "}
                 Log In
               </Button>
             </>
