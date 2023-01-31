@@ -212,28 +212,22 @@ const PaymentForm = () => {
                   Execute transfer
                 </FormLabel>
                 <Controller
-                  control={control}
-                  name="transferTime"
-                  render={({ field: { onChange, onBlur, value, ref } }) => (
-                    <RadioGroup
-                      name="radio-buttons-group"
-                      row
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      selected={value}
-                    >
+                  render={({ field }) => (
+                    <RadioGroup row {...field}>
                       <FormControlLabel
                         value="now"
-                        control={<Radio checked />}
-                        label="Now (extra fees may be incurred)"
+                        control={<Radio />}
+                        label="Now (extra charges may be incurred)"
                       />
                       <FormControlLabel
                         value="tomorrow"
                         control={<Radio />}
-                        label="Tomorrow Morning"
+                        label="Tomorrow morning"
                       />
                     </RadioGroup>
                   )}
+                  name="transferTime"
+                  control={control}
                 />
               </FormControl>
               <Button type="submit" variant="contained">
