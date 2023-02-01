@@ -2,7 +2,7 @@ import { Button, Container, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { React, useContext } from "react";
 import LoginContext from "./LoginContext";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 const Home = () => {
   const { isLoggedIn } = useContext(LoginContext);
@@ -21,7 +21,11 @@ const Home = () => {
         {isLoggedIn ? (
           <>
             <Typography align="center" variant="h2">
-              {t("home.title")}
+              <Trans
+                i18nKey="home.title"
+                values={{ appName: "Payment Service" }}
+                components={{ bold: <strong /> }}
+              />
             </Typography>
             <Typography align="center" variant="h5">
               {t("home.desc_LoggedIn")}
@@ -30,7 +34,11 @@ const Home = () => {
         ) : (
           <>
             <Typography align="center" variant="h2">
-              {t("home.title")}
+              <Trans
+                i18nKey="home.title"
+                values={{ appName: "Payment Service" }}
+                components={{ bold: <strong /> }}
+              />
             </Typography>
             <Typography align="center" variant="h5">
               {t("home.desc_notLoggedIn")}
@@ -41,7 +49,6 @@ const Home = () => {
               component={Link}
               to="/login"
             >
-              {" "}
               {t("home.login")}
             </Button>
           </>

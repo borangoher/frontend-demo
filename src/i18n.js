@@ -22,7 +22,7 @@ i18n
             part3: "Information",
           },
           home: {
-            title: "Welcome to Payment Service!",
+            title: "Welcome to <bold>{{appName}}</bold>",
             desc_notLoggedIn:
               "Welcome to Payment Service. You can handle your payments through this website. Please log in to continue.",
             desc_LoggedIn:
@@ -89,7 +89,7 @@ i18n
             part3: "Bilgi",
           },
           home: {
-            title: "Payment Service'e hoş geldiniz!",
+            title: "<bold>{{appName}}</bold>'e hoş geldiniz!",
             desc_notLoggedIn:
               "Payment Service'e hoş geldiniz. Ödemelerinizi bu site aracılığıyla yürütebilirsiniz. Lütfen devam etmek için giriş yapın.",
             desc_LoggedIn:
