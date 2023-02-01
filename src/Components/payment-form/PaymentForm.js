@@ -21,8 +21,10 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./paymentForm.validation";
 import { paymentFormDefaultValues } from "./paymentForm.constant";
+import { useTranslation } from "react-i18next";
 
 const PaymentForm = () => {
+  const { t } = useTranslation();
   const { isLoggedIn } = useContext(LoginContext);
 
   const {
@@ -60,7 +62,7 @@ const PaymentForm = () => {
                         selected={value}
                         required
                         type="text"
-                        label="Cardholder Name"
+                        label={t("payment.cardholderName")}
                       />
                     )}
                   />
@@ -81,7 +83,7 @@ const PaymentForm = () => {
                         selected={value}
                         required
                         type="number"
-                        label="Card Number"
+                        label={t("payment.cardNumber")}
                       />
                     )}
                   />
@@ -100,7 +102,7 @@ const PaymentForm = () => {
                         selected={value}
                         required
                         type="date"
-                        label="Expiry Date"
+                        label={t("payment.expiryDate")}
                       />
                     )}
                   />
@@ -119,7 +121,7 @@ const PaymentForm = () => {
                         selected={value}
                         required
                         type="number"
-                        label="Security Number"
+                        label={t("payment.securityNumber")}
                       />
                     )}
                   />
@@ -140,7 +142,7 @@ const PaymentForm = () => {
                         selected={value}
                         required
                         type="number"
-                        label="Account Number"
+                        label={t("payment.accountNumber")}
                       />
                     )}
                   />
@@ -161,7 +163,7 @@ const PaymentForm = () => {
                         selected={value}
                         required
                         type="number"
-                        label="Amount"
+                        label={t("payment.amount")}
                       />
                     )}
                   />
@@ -183,7 +185,7 @@ const PaymentForm = () => {
                           selected={value}
                         />
                       }
-                      label="Do not display sender name"
+                      label={t("payment.displaySenderName")}
                     />
                   )}
                 />
@@ -199,7 +201,7 @@ const PaymentForm = () => {
                           selected={value}
                         />
                       }
-                      label="Use SERVICE for transfer"
+                      label={t("payment.useService")}
                     />
                   )}
                 />
@@ -209,7 +211,7 @@ const PaymentForm = () => {
               </FormGroup>
               <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">
-                  Execute transfer
+                  {t("payment.execute")}
                 </FormLabel>
                 <Controller
                   render={({ field }) => (
@@ -217,12 +219,12 @@ const PaymentForm = () => {
                       <FormControlLabel
                         value="now"
                         control={<Radio />}
-                        label="Now (extra charges may be incurred)"
+                        label={t("payment.executeNow")}
                       />
                       <FormControlLabel
                         value="tomorrow"
                         control={<Radio />}
-                        label="Tomorrow morning"
+                        label={t("payment.executeTomorrow")}
                       />
                     </RadioGroup>
                   )}
@@ -231,14 +233,13 @@ const PaymentForm = () => {
                 />
               </FormControl>
               <Button type="submit" variant="contained">
-                Make Payment
+                {t("payment.makePayment")}
               </Button>
             </>
           ) : (
             <>
               <Typography align="center" variant="h5">
-                You must be logged in to make a payment. Please log in to your
-                account first.
+                {t("payment.mustLogIn")}
               </Typography>
               <Button
                 size="large"
@@ -246,7 +247,7 @@ const PaymentForm = () => {
                 component={Link}
                 to="/login"
               >
-                Log In
+                {t("payment.login")}
               </Button>
             </>
           )}
