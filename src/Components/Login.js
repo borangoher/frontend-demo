@@ -8,7 +8,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useLogin } from "./LoginContext";
+import { useLogin, LoginActions } from "./LoginContext";
 
 const Login = () => {
   const {
@@ -20,7 +20,7 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = () => dispatch({ type: "log in" });
+  const onSubmit = () => dispatch({ type: LoginActions.LOGIN });
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -39,7 +39,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => dispatch({ type: "log out" })}
+            onClick={() => dispatch({ type: LoginActions.LOGOUT })}
           >
             Log Out
           </Button>

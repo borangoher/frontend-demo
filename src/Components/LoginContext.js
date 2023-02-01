@@ -1,13 +1,17 @@
 import { createContext, useReducer, useContext } from "react";
 
 const LoginContext = createContext();
+export const LoginActions = {
+  LOGIN: "log in",
+  LOGOUT: "log out",
+};
 
-function countReducer(state, action) {
+function loginReducer(state, action) {
   switch (action.type) {
-    case "log in": {
+    case LoginActions.LOGIN: {
       return { isLoggedIn: true };
     }
-    case "log out": {
+    case LoginActions.LOGOUT: {
       return { isLoggedIn: false };
     }
     default: {
@@ -17,7 +21,7 @@ function countReducer(state, action) {
 }
 
 function LoginProvider({ children }) {
-  const [state, dispatch] = useReducer(countReducer, { isLoggedIn: false });
+  const [state, dispatch] = useReducer(loginReducer, { isLoggedIn: false });
   const value = { state, dispatch };
   return (
     <LoginContext.Provider value={value}>{children}</LoginContext.Provider>
