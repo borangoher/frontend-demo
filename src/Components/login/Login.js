@@ -18,6 +18,7 @@ const Login = () => {
     state: { isLoggedIn },
   } = useLogin();
   const { dispatch } = useLogin();
+
   const {
     control,
     formState: { errors },
@@ -27,6 +28,7 @@ const Login = () => {
     defaultValues: loginDefaultValues,
   });
   const onSubmit = () => dispatch({ type: LoginActions.LOGIN });
+
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -46,6 +48,7 @@ const Login = () => {
             type="submit"
             variant="contained"
             onClick={() => dispatch({ type: LoginActions.LOGOUT })}
+
           >
             Log Out
           </Button>
