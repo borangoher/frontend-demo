@@ -1,8 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { ValidLengthLimits } from "./components/login/Login.constant";
-import { ValidLengths } from "./components/payment-form/paymentForm.constant";
 
 i18n
   .use(LanguageDetector)
@@ -41,8 +39,10 @@ i18n
             password: "Password",
             login: "Log In",
             errorMessages: {
-              usernameLength: `Username should be between ${ValidLengthLimits.MIN_USERNAME_LENGTH} and ${ValidLengthLimits.MAX_USERNAME_LENGTH} characters`,
-              passwordLength: `Password should be between ${ValidLengthLimits.MIN_PASSWORD_LENGTH} and ${ValidLengthLimits.MAX_PASSWORD_LENGTH} characters`,
+              usernameLength:
+                "Username should be between {{minLength}} and {{maxLength}} characters",
+              passwordLength:
+                "Password should be between {{minLength}} and {{maxLength}} characters",
             },
           },
           payment: {
@@ -63,14 +63,17 @@ i18n
             login: "Log In",
             errorMessages: {
               required: "This field is required",
-              cardholderNameMin: `Cardholder name must at least contain ${ValidLengths.MIN_CARDHOLDER_NAME_LENGTH} characters`,
+              cardholderNameMin:
+                "Cardholder name must at least contain {{minLength}} characters",
               cardNumberType: "Card number must be a number",
-              cardNumberLength: `Card number must be exactly ${ValidLengths.CARD_NUMBER_LENGTH} digits`,
+              cardNumberLength: "Card number must be exactly {{length}} digits",
               expiryDateMin: "Expiry date must be a future date",
               securityNumberType: "Security number must be a number",
-              secuirtyNumberLength: `Security number must be exactly ${ValidLengths.SECURITY_NUMBER_LENGTH} digits`,
+              secuirtyNumberLength:
+                "Security number must be exactly {{length}} digits",
               accountNumberType: "Account number must be a number",
-              accountNumberLength: `Account number must be exactly ${ValidLengths.ACCOUNT_NUMBER_LENGTH} digits`,
+              accountNumberLength:
+                "Account number must be exactly {{length}} digits",
               amountType: "Amount to transfer must be a number",
               amountMax:
                 "You can transfer no more than 25000 in a single transaction",
@@ -109,8 +112,10 @@ i18n
             password: "Şifre",
             login: "Giriş Yap",
             errorMessages: {
-              usernameLength: `Kullancı adı uzunluğu ${ValidLengthLimits.MIN_USERNAME_LENGTH} ve ${ValidLengthLimits.MAX_USERNAME_LENGTH} karakter arasında olmalıdır`,
-              passwordLength: `Şifre uzunluğu ${ValidLengthLimits.MIN_PASSWORD_LENGTH} ve ${ValidLengthLimits.MAX_PASSWORD_LENGTH} karakter arasında olmalıdır`,
+              usernameLength:
+                "Kullancı adı uzunluğu {{minLength}} ve {{maxLength}} karakter arasında olmalıdır",
+              passwordLength:
+                "Şifre uzunluğu {{minLength}} ve {{maxLength}} karakter arasında olmalıdır",
             },
           },
           payment: {
@@ -131,14 +136,18 @@ i18n
             login: "Giriş Yap",
             errorMessages: {
               required: "Bu alanın doldurulması zorunludur",
-              cardholderNameMin: `Kart sahibi ismi en az ${ValidLengths.MIN_CARDHOLDER_NAME_LENGTH} karakter uzunluğunda olmalıdır`,
+              cardholderNameMin:
+                "Kart sahibi ismi en az {{minLength}} karakter uzunluğunda olmalıdır",
               cardNumberType: "Kart numarası bir sayı olmalıdır",
-              cardNumberLength: `Kart numarası tam olarak ${ValidLengths.CARD_NUMBER_LENGTH} haneli olmalıdır`,
+              cardNumberLength:
+                "Kart numarası tam olarak {{length}} haneli olmalıdır",
               expiryDateMin: "Son geçerlilik tarihi gelecekte olmalıdır",
               securityNumberType: "Güvenlik kodu bir sayı olmalıdır",
-              secuirtyNumberLength: `Güvenlik kodu tam olarak ${ValidLengths.SECURITY_NUMBER_LENGTH} haneli olmalıdır`,
+              secuirtyNumberLength:
+                "Güvenlik kodu tam olarak {{length}} haneli olmalıdır",
               accountNumberType: "Hesap numarası bir sayı olmalıdır",
-              accountNumberLength: `Hesap numarası tam olarak ${ValidLengths.ACCOUNT_NUMBER_LENGTH} haneli olmalıdır`,
+              accountNumberLength:
+                "Hesap numarası tam olarak {{length}} haneli olmalıdır",
               amountType: "transfer edilecek miktar bir sayı olmalıdır",
               amountMax: "Tek işlemde 25000 üzerinde transfer yapılamaz",
               serviceAgreement:

@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./paymentForm.validation";
-import { paymentFormDefaultValues } from "./paymentForm.constant";
+import { paymentFormDefaultValues, ValidLengths } from "./paymentForm.constant";
 import { useTranslation } from "react-i18next";
 
 const PaymentForm = () => {
@@ -68,7 +68,9 @@ const PaymentForm = () => {
                   />
                   {errors.cardholderName && (
                     <Alert severity="error">
-                      {t(errors.cardholderName.message)}
+                      {t(errors.cardholderName.message, {
+                        minLength: ValidLengths.MIN_CARDHOLDER_NAME_LENGTH,
+                      })}
                     </Alert>
                   )}
                 </Grid>
@@ -89,7 +91,9 @@ const PaymentForm = () => {
                   />
                   {errors.cardNumber && (
                     <Alert severity="error">
-                      {t(errors.cardNumber.message)}
+                      {t(errors.cardNumber.message, {
+                        length: ValidLengths.CARD_NUMBER_LENGTH,
+                      })}
                     </Alert>
                   )}
                 </Grid>
@@ -131,7 +135,9 @@ const PaymentForm = () => {
                   />
                   {errors.securityNumber && (
                     <Alert severity="error">
-                      {t(errors.securityNumber.message)}
+                      {t(errors.securityNumber.message, {
+                        length: ValidLengths.SECURITY_NUMBER_LENGTH,
+                      })}
                     </Alert>
                   )}
                 </Grid>
@@ -152,7 +158,9 @@ const PaymentForm = () => {
                   />
                   {errors.accountNumber && (
                     <Alert severity="error">
-                      {t(errors.accountNumber.message)}
+                      {t(errors.accountNumber.message, {
+                        length: ValidLengths.ACCOUNT_NUMBER_LENGTH,
+                      })}
                     </Alert>
                   )}
                 </Grid>

@@ -12,7 +12,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
-import { loginDefaultValues } from "./Login.constant";
+import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
 
 const Login = () => {
@@ -75,7 +75,12 @@ const Login = () => {
               )}
             />
             {errors.username && (
-              <Alert severity="error">{t(errors.username.message)}</Alert>
+              <Alert severity="error">
+                {t(errors.username.message, {
+                  minLength: ValidLengthLimits.MIN_USERNAME_LENGTH,
+                  maxLength: ValidLengthLimits.MAX_USERNAME_LENGTH,
+                })}
+              </Alert>
             )}
             <Controller
               control={control}
@@ -92,7 +97,12 @@ const Login = () => {
               )}
             />
             {errors.password && (
-              <Alert severity="error">{t(errors.password.message)}</Alert>
+              <Alert severity="error">
+                {t(errors.password.message, {
+                  minLength: ValidLengthLimits.MIN_PASSWORD_LENGTH,
+                  maxLength: ValidLengthLimits.MAX_PASSWORD_LENGTH,
+                })}
+              </Alert>
             )}
             <Button type="submit" variant="contained">
               {t("login.login")}
