@@ -75,7 +75,7 @@ const Login = () => {
               )}
             />
             {errors.username && (
-              <Alert severity="error">{errors.username.message}</Alert>
+              <Alert severity="error">{t(errors.username.message)}</Alert>
             )}
             <Controller
               control={control}
@@ -92,7 +92,7 @@ const Login = () => {
               )}
             />
             {errors.password && (
-              <Alert severity="error">{errors.password.message}</Alert>
+              <Alert severity="error">{t(errors.password.message)}</Alert>
             )}
             <Button type="submit" variant="contained">
               {t("login.login")}

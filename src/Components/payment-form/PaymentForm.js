@@ -68,7 +68,7 @@ const PaymentForm = () => {
                   />
                   {errors.cardholderName && (
                     <Alert severity="error">
-                      {errors.cardholderName.message}
+                      {t(errors.cardholderName.message)}
                     </Alert>
                   )}
                 </Grid>
@@ -88,7 +88,9 @@ const PaymentForm = () => {
                     )}
                   />
                   {errors.cardNumber && (
-                    <Alert severity="error">{errors.cardNumber.message}</Alert>
+                    <Alert severity="error">
+                      {t(errors.cardNumber.message)}
+                    </Alert>
                   )}
                 </Grid>
                 <Grid item xs={6}>
@@ -107,7 +109,9 @@ const PaymentForm = () => {
                     )}
                   />
                   {errors.expiryDate && (
-                    <Alert severity="error">{errors.expiryDate.message}</Alert>
+                    <Alert severity="error">
+                      {t(errors.expiryDate.message)}
+                    </Alert>
                   )}
                 </Grid>
                 <Grid item xs={6} justifyContent="center">
@@ -127,7 +131,7 @@ const PaymentForm = () => {
                   />
                   {errors.securityNumber && (
                     <Alert severity="error">
-                      {errors.securityNumber.message}
+                      {t(errors.securityNumber.message)}
                     </Alert>
                   )}
                 </Grid>
@@ -148,7 +152,7 @@ const PaymentForm = () => {
                   />
                   {errors.accountNumber && (
                     <Alert severity="error">
-                      {errors.accountNumber.message}
+                      {t(errors.accountNumber.message)}
                     </Alert>
                   )}
                 </Grid>
@@ -168,7 +172,7 @@ const PaymentForm = () => {
                     )}
                   />
                   {errors.amount && (
-                    <Alert severity="error">{errors.amount.message}</Alert>
+                    <Alert severity="error">{t(errors.amount.message)}</Alert>
                   )}
                 </Grid>
               </Grid>
@@ -206,7 +210,7 @@ const PaymentForm = () => {
                   )}
                 />
                 {errors.useService && (
-                  <Alert severity="error">{errors.useService.message}</Alert>
+                  <Alert severity="error">{t(errors.useService.message)}</Alert>
                 )}
               </FormGroup>
               <FormControl>
