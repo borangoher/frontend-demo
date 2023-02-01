@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const lngs = {
-  en: { nativeName: "English" },
-  tr: { nativeName: "Türkçe" },
+  en: { en: "English", tr: "Turkish" },
+  tr: { en: "İngilizce", tr: "Türkçe" },
 };
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
               type="submit"
               onClick={() => i18n.changeLanguage(lng)}
             >
-              {lngs[lng].nativeName}
+              {lngs[i18n.resolvedLanguage][lng]}
             </Button>
           ))}
           <Button component={Link} to="/login" color="inherit">
