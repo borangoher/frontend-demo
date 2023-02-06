@@ -11,9 +11,11 @@ import { useLogin, LoginActions } from "./LoginContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
-import { loginDefaultValues } from "./Login.constant";
+import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const {
     state: { isLoggedIn },
   } = useLogin();
@@ -42,7 +44,7 @@ const Login = () => {
           minHeight="90vh"
         >
           <Typography align="center" variant="h5">
-            You are currently logged in. Would you like to log out?
+            {t("login.loggedIn")}
           </Typography>
           <Button
             type="submit"
@@ -50,7 +52,7 @@ const Login = () => {
             onClick={() => dispatch({ type: LoginActions.LOGOUT })}
 
           >
-            Log Out
+            {t("login.logout")}
           </Button>
         </Box>
       ) : (
@@ -73,12 +75,17 @@ const Login = () => {
                   selected={value}
                   required
                   type="text"
-                  label="Username"
+                  label={t("login.username")}
                 />
               )}
             />
             {errors.username && (
-              <Alert severity="error">{errors.username.message}</Alert>
+              <Alert severity="error">
+                {t(errors.username.message, {
+                  minLength: ValidLengthLimits.MIN_USERNAME_LENGTH,
+                  maxLength: ValidLengthLimits.MAX_USERNAME_LENGTH,
+                })}
+              </Alert>
             )}
             <Controller
               control={control}
@@ -90,15 +97,20 @@ const Login = () => {
                   selected={value}
                   required
                   type="text"
-                  label="Password"
+                  label={t("login.password")}
                 />
               )}
             />
             {errors.password && (
-              <Alert severity="error">{errors.password.message}</Alert>
+              <Alert severity="error">
+                {t(errors.password.message, {
+                  minLength: ValidLengthLimits.MIN_PASSWORD_LENGTH,
+                  maxLength: ValidLengthLimits.MAX_PASSWORD_LENGTH,
+                })}
+              </Alert>
             )}
             <Button type="submit" variant="contained">
-              Log In
+              {t("login.login")}
             </Button>
           </Box>
         </form>

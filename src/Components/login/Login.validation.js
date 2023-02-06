@@ -1,25 +1,25 @@
 import * as yup from "yup";
-import { ValidLengths } from "./Login.constant";
+import { ValidLengthLimits } from "./Login.constant";
 
 export const schema = yup.object({
   username: yup
     .string()
     .min(
-      ValidLengths.MIN_USERNAME_LENGTH,
-      `Username should be between ${ValidLengths.MIN_USERNAME_LENGTH} and ${ValidLengths.MAX_USERNAME_LENGTH} characters`
+      ValidLengthLimits.MIN_USERNAME_LENGTH,
+      "login.errorMessages.usernameLength"
     )
     .max(
-      ValidLengths.MAX_USERNAME_LENGTH,
-      `Username should be between ${ValidLengths.MIN_USERNAME_LENGTH} and ${ValidLengths.MAX_USERNAME_LENGTH} characters`
+      ValidLengthLimits.MAX_USERNAME_LENGTH,
+      "login.errorMessages.usernameLength"
     ),
   password: yup
     .string()
     .min(
-      ValidLengths.MIN_PASSWORD_LENGTH,
-      `Password should be between ${ValidLengths.MIN_PASSWORD_LENGTH} and ${ValidLengths.MAX_PASSWORD_LENGTH} characters`
+      ValidLengthLimits.MIN_PASSWORD_LENGTH,
+      "login.errorMessages.passwordLength"
     )
     .max(
-      ValidLengths.MAX_PASSWORD_LENGTH,
-      `Password should be between ${ValidLengths.MIN_PASSWORD_LENGTH} and ${ValidLengths.MAX_PASSWORD_LENGTH} characters`
+      ValidLengthLimits.MAX_PASSWORD_LENGTH,
+      "login.errorMessages.passwordLength"
     ),
 });

@@ -7,8 +7,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+const lngs = {
+  en: { nativeName: "English" },
+  tr: { nativeName: "Türkçe" },
+};
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   return (
     <Box>
       <AppBar position="static">
@@ -25,14 +32,25 @@ const Navbar = () => {
           >
             Payment Service
           </Typography>
+          {Object.keys(lngs).map((lng) => (
+            <Button
+              key={lng}
+              color="inherit"
+              disabled={i18n.resolvedLanguage === lng}
+              type="submit"
+              onClick={() => i18n.changeLanguage(lng)}
+            >
+              {lngs[lng].nativeName}
+            </Button>
+          ))}
           <Button component={Link} to="/login" color="inherit">
-            Log In
+            {t("navbar.part1")}
           </Button>
           <Button component={Link} to="/payment" color="inherit">
-            Payment
+            {t("navbar.part2")}
           </Button>
           <Button component={Link} to="/information" color="inherit">
-            Information
+            {t("navbar.part3")}
           </Button>
         </Toolbar>
       </AppBar>

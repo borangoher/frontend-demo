@@ -6,51 +6,51 @@ const schema = yup.object({
     .string()
     .min(
       ValidLengths.MIN_CARDHOLDER_NAME_LENGTH,
-      `Cardholder name must at least contain ${ValidLengths.MIN_CARDHOLDER_NAME_LENGTH} characters`
+      "payment.errorMessages.cardholderNameMin"
     )
-    .required("This field is required"),
+    .required("payment.errorMessages.required"),
   cardNumber: yup
-    .number("Card number must be a number")
+    .number("payment.errorMessages.cardNumberType")
     .positive()
     .test(
       "len",
-      `Card number must be exactly ${ValidLengths.CARD_NUMBER_LENGTH} digits`,
+      "payment.errorMessages.cardNumberLength",
       (val) => val && val.toString().length === ValidLengths.CARD_NUMBER_LENGTH
     )
-    .required("This field is required"),
+    .required("payment.errorMessages.required"),
   expiryDate: yup
     .date()
-    .min(new Date(), "Expiry date must be a future date")
+    .min(new Date(), "payment.errorMessages.expiryDateMin")
     .required(),
   securityNumber: yup
-    .number("Security number must be a number")
+    .number("payment.errorMessages.securityNumberType")
     .positive()
     .test(
       "len",
-      `Security number must be exactly ${ValidLengths.SECURITY_NUMBER_LENGTH} digits`,
+      "payment.errorMessages.securityNumberType",
       (val) =>
         val && val.toString().length === ValidLengths.SECURITY_NUMBER_LENGTH
     )
-    .required("This field is required"),
+    .required("payment.errorMessages.required"),
   accountNumber: yup
-    .number("Account number must be a number")
+    .number("payment.errorMessages.accountNumberType")
     .positive()
     .test(
       "len",
-      `Card number must be exactly ${ValidLengths.ACCOUNT_NUMBER_LENGTH} digits`,
+      "payment.errorMessages.accountNumberLength",
       (val) =>
         val && val.toString().length === ValidLengths.ACCOUNT_NUMBER_LENGTH
     )
-    .required("This field is required"),
+    .required("payment.errorMessages.required"),
   amount: yup
-    .number("Amount to transfer must be a number")
+    .number("payment.errorMessages.amountType")
     .positive()
-    .max(25000, "You can transfer no more than 25000 in a single transaction"),
+    .max(25000, "payment.errorMessages.amountMax"),
   displaySenderName: yup.boolean(),
   useService: yup
     .boolean()
-    .oneOf([true], "You must agree to use SERVICE for this transfer"),
-  transferTime: yup.string("Please select one of the options"),
+    .oneOf([true], "payment.errorMessages.serviceAgreement"),
+  transferTime: yup.string("payment.errorMessages.noOptionSelected"),
 });
 
 export default schema;

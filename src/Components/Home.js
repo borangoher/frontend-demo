@@ -1,5 +1,6 @@
 import { Button, Container, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useTranslation, Trans } from "react-i18next";
 import { React } from "react";
 import { useLogin } from "./LoginContext";
 
@@ -8,6 +9,7 @@ const Home = () => {
     state: { isLoggedIn },
   } = useLogin();
 
+  const { t } = useTranslation();
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
       <Box
@@ -21,21 +23,27 @@ const Home = () => {
         {isLoggedIn ? (
           <>
             <Typography align="center" variant="h2">
-              Welcome to Payment Service!
+              <Trans
+                i18nKey="home.title"
+                values={{ appName: "Payment Service" }}
+                components={{ bold: <strong /> }}
+              />
             </Typography>
             <Typography align="center" variant="h5">
-              Welcome to Payment Service. You can handle your payments through
-              this website. You are currently logged in.
+              {t("home.desc_LoggedIn")}
             </Typography>
           </>
         ) : (
           <>
             <Typography align="center" variant="h2">
-              Welcome to Payment Service!
+              <Trans
+                i18nKey="home.title"
+                values={{ appName: "Payment Service" }}
+                components={{ bold: <strong /> }}
+              />
             </Typography>
             <Typography align="center" variant="h5">
-              Welcome to Payment Service. You can handle your payments through
-              this website. Please log in to continue.
+              {t("home.desc_notLoggedIn")}
             </Typography>
             <Button
               size="large"
@@ -43,8 +51,7 @@ const Home = () => {
               component={Link}
               to="/login"
             >
-              {" "}
-              Log In
+              {t("home.login")}
             </Button>
           </>
         )}
