@@ -1,5 +1,5 @@
-import { React, useContext } from "react";
-import LoginContext from "../LoginContext";
+import { React } from "react";
+import { useLogin } from "../LoginContext";
 import {
   Container,
   Box,
@@ -25,7 +25,9 @@ import { useTranslation } from "react-i18next";
 
 const PaymentForm = () => {
   const { t } = useTranslation();
-  const { isLoggedIn } = useContext(LoginContext);
+  const {
+    state: { isLoggedIn },
+  } = useLogin();
 
   const {
     handleSubmit,

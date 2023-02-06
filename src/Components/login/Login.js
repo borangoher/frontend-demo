@@ -1,6 +1,4 @@
 import React from "react";
-import { useContext } from "react";
-import LoginContext from "../LoginContext";
 import {
   Container,
   Box,
@@ -9,6 +7,7 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
+import { useLogin, LoginActions } from "./LoginContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
@@ -17,7 +16,11 @@ import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const { t } = useTranslation();
-  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+  const {
+    state: { isLoggedIn },
+  } = useLogin();
+  const { dispatch } = useLogin();
+
   const {
     control,
     formState: { errors },
@@ -26,7 +29,7 @@ const Login = () => {
     resolver: yupResolver(schema),
     defaultValues: loginDefaultValues,
   });
-  const onSubmit = () => setIsLoggedIn(true);
+  const onSubmit = () => dispatch({ type: LoginActions.LOGIN });
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -45,7 +48,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => setIsLoggedIn(false)}
+            onClick={() => dispatch({ type: LoginActions.LOGOUT })}
           >
             {t("login.logout")}
           </Button>
