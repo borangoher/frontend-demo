@@ -43,13 +43,14 @@ const Login = () => {
     defaultValues: loginDefaultValues,
   });
 
-  const onSubmit = (userData) => {
-    //console.log(userData);
-    loginUser(userData)
-      .then(() => dispatch({ type: LoginActions.LOGIN }))
-      .catch((error) => {
-        console.log(error);
-      });
+  const onSubmit = async (userData) => {
+    try {
+      await loginUser(userData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch({ type: LoginActions.LOGIN });
+    }
   };
 
   return (
