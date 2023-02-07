@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import PaymentForm from "../PaymentForm";
-import * as defaultTranslation from "../../../translations/en.json";
 import { fireEvent } from "@testing-library/react";
 import { LoginProvider } from "../../LoginContext";
 import { BrowserRouter } from "react-router-dom";
@@ -28,7 +27,7 @@ it("should display an error for invalid cardholder name", async () => {
 
   fireEvent.change(usernameElement, { target: { value: "abcde" } });
   fireEvent.change(passwordElement, { target: { value: "abcdefghj" } });
-  fireEvent.click(loginButton);
+  fireEvent.click(loginButton); //changes isLoggedIn context to true
 
   await waitFor(() => {
     expect(
