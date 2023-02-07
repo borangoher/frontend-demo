@@ -62,3 +62,24 @@ describe("test invalid input responses", () => {
     ).toBeInTheDocument();
   });
 });
+
+it("should log user out when pressing log out button", async () => {
+  render(<MockLogin />);
+
+  const usernameElement = screen.getByLabelText(/login.username/i);
+  const passwordElement = screen.getByLabelText(/login.password/i);
+  const loginButton = screen.getByRole("button", { value: /login.login/i });
+
+  fireEvent.change(usernameElement, { target: { value: "abcde" } });
+  fireEvent.change(passwordElement, { target: { value: "abcdefghj" } });
+  fireEvent.click(loginButton); //isLoggedIn = true
+
+  const logoutButton = await screen.findByRole("button", {
+    value: /login.logout/i,
+  });
+  fireEvent.click(logoutButton); //isLoggedIn = false
+
+  expect(
+    await screen.findByRole("button", { value: /login.login/i })
+  ).toBeInTheDocument();
+});
