@@ -7,12 +7,28 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useLogin, LoginActions } from "./LoginContext";
+import { useLogin, LoginActions } from "../LoginContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
 import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
+
+const loginUser = async (userData) => {
+  const res = await fetch("http://localhost:8080/login", {
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(userData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw Error("Failed to log in");
+  }
+  return res;
+};
 
 const Login = () => {
   const { t } = useTranslation();
@@ -29,7 +45,16 @@ const Login = () => {
     resolver: yupResolver(schema),
     defaultValues: loginDefaultValues,
   });
-  const onSubmit = () => dispatch({ type: LoginActions.LOGIN });
+
+  const onSubmit = async (userData) => {
+    try {
+      await loginUser(userData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch({ type: LoginActions.LOGIN });
+    }
+  };
 
 
   return (
