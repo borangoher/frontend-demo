@@ -13,22 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
 import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
-
-const loginUser = async (userData) => {
-  const res = await fetch("http://localhost:8080/login", {
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(userData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!res.ok) {
-    throw Error("Failed to log in");
-  }
-  return res;
-};
+import { loginUser } from "../../api";
 
 const Login = () => {
   const { t } = useTranslation();
