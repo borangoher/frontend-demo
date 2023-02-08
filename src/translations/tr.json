@@ -22,7 +22,8 @@
     "login": "Giriş Yap",
     "errorMessages": {
       "usernameLength": "Kullancı adı uzunluğu {{minLength}} ve {{maxLength}} karakter arasında olmalıdır",
-      "passwordLength": "Şifre uzunluğu {{minLength}} ve {{maxLength}} karakter arasında olmalıdır"
+      "passwordLength": "Şifre uzunluğu {{minLength}} ve {{maxLength}} karakter arasında olmalıdır",
+      "invalidAuth": "Giriş başarısız: Geçersiz kullanıcı adı ya da şifre"
     }
   },
   "payment": {

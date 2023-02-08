@@ -37,7 +37,7 @@ const Login = () => {
     try {
       await loginUser(userData);
     } catch (error) {
-      alert(error);
+      alert(t(error.message));
       invalidLogin = true;
     }
     if (!invalidLogin) {

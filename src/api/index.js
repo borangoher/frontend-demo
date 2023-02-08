@@ -9,7 +9,7 @@ export const loginUser = async (userData) => {
   });
 
   if (!response.ok) {
-    throw Error("Failed to log in");
+    throw Error("login.errorMessages.invalidAuth");
   }
   return response;
 };
