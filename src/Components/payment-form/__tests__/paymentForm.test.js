@@ -61,8 +61,4 @@ it("should display an error for invalid cardholder name", async () => {
       screen.getByText(/payment.errorMessages.cardholderNameMin/i)
     ).toBeInTheDocument();
   });
-
-  expect(
-    screen.getByText(/payment.errorMessages.cardholderNameMin/i)
-  ).toBeInTheDocument();
 });
