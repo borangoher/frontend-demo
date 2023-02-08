@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { fireEvent } from "@testing-library/react";
 import { LoginProvider } from "../../LoginContext";
 import { BrowserRouter } from "react-router-dom";
 import Login from "../../login/Login";
@@ -86,5 +85,22 @@ it("should log user out when pressing log out button", async () => {
 
   expect(
     await screen.findByRole("button", { value: /login.login/i })
+  ).toBeInTheDocument();
+});
+
+it("should display appropriate error for invalid auth", async () => {
+  const user = userEvent.setup();
+  render(<MockLogin />);
+
+  const usernameElement = screen.getByLabelText(/login.username/i);
+  const passwordElement = screen.getByLabelText(/login.password/i);
+  const loginButton = screen.getByRole("button", { value: /login.login/i });
+
+  await user.type(usernameElement, "invalid");
+  await user.type(passwordElement, "abcdefghj");
+  await user.click(loginButton);
+
+  expect(
+    await screen.findByText(/login.errorMessages.invalidAuth/i)
   ).toBeInTheDocument();
 });
