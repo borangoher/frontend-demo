@@ -32,15 +32,18 @@ const Login = () => {
   });
 
   const onSubmit = async (userData) => {
+    var invalidLogin = false;
+
     try {
       await loginUser(userData);
     } catch (error) {
-      console.log(error);
-    } finally {
+      alert(error);
+      invalidLogin = true;
+    }
+    if (!invalidLogin) {
       dispatch({ type: LoginActions.LOGIN });
     }
   };
-
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -60,7 +63,6 @@ const Login = () => {
             type="submit"
             variant="contained"
             onClick={() => dispatch({ type: LoginActions.LOGOUT })}
-
           >
             {t("login.logout")}
           </Button>

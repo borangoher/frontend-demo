@@ -1,5 +1,5 @@
 export const loginUser = async (userData) => {
-  const res = await fetch("/login", {
+  const response = await fetch("/login", {
     method: "POST",
     mode: "cors",
     body: JSON.stringify(userData),
@@ -8,8 +8,8 @@ export const loginUser = async (userData) => {
     },
   });
 
-  if (!res.ok) {
+  if (!response.ok) {
     throw Error("Failed to log in");
   }
-  return res;
+  return response;
 };
