@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import PaymentForm from "../PaymentForm";
-import { fireEvent } from "@testing-library/react";
 import { LoginProvider } from "../../LoginContext";
 import { BrowserRouter } from "react-router-dom";
 import Login from "../../login/Login";
 import { waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 
 const MockPaymentFormWrapper = () => {
   return (
@@ -19,15 +19,16 @@ const MockPaymentFormWrapper = () => {
 };
 
 it("should display an error for invalid cardholder name", async () => {
+  const user = userEvent.setup();
   render(<MockPaymentFormWrapper />);
 
   const usernameElement = screen.getByLabelText(/login.username/i);
   const passwordElement = screen.getByLabelText(/login.password/i);
   const loginButton = screen.getByRole("button", { value: /login.login/i });
 
-  fireEvent.change(usernameElement, { target: { value: "abcde" } });
-  fireEvent.change(passwordElement, { target: { value: "abcdefghj" } });
-  fireEvent.click(loginButton); //changes isLoggedIn context to true
+  await user.type(usernameElement, "abcde");
+  await user.type(passwordElement, "abcdefghj");
+  await user.click(loginButton); //changes isLoggedIn context to true
 
   await waitFor(() => {
     expect(
@@ -47,14 +48,14 @@ it("should display an error for invalid cardholder name", async () => {
     name: /payment.makePayment/i,
   });
 
-  fireEvent.change(cardholderNameElement, { target: { value: "A" } });
-  fireEvent.change(cardNumberElement, { target: { value: 1111222233334444 } });
-  fireEvent.change(expiryDateElement, { target: { value: "2023-06-10" } });
-  fireEvent.change(securityNumberElement, { target: { value: 123 } });
-  fireEvent.change(accountNumberElement, { target: { value: 1234567890 } });
-  fireEvent.change(amountElement, { target: { value: 150 } });
-  fireEvent.click(useServiceElement);
-  fireEvent.click(submitElement);
+  await user.type(cardholderNameElement, "A");
+  await user.type(cardNumberElement, "1111222233334444");
+  await user.type(expiryDateElement, "2023-06-10");
+  await user.type(securityNumberElement, "123");
+  await user.type(accountNumberElement, "1234567890");
+  await user.type(amountElement, "150");
+  await user.click(useServiceElement);
+  await user.click(submitElement);
 
   await waitFor(() => {
     expect(
