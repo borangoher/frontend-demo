@@ -22,7 +22,8 @@
     "login": "Log In",
     "errorMessages": {
       "usernameLength": "Username should be between {{minLength}} and {{maxLength}} characters",
-      "passwordLength": "Password should be between {{minLength}} and {{maxLength}} characters"
+      "passwordLength": "Password should be between {{minLength}} and {{maxLength}} characters",
+      "invalidAuth": "Failed to log in: Invalid username or password"
     }
   },
   "payment": {

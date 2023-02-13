@@ -13,24 +13,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
 import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
-
-const loginUser = async (userData) => {
-  const res = await fetch("http://localhost:8080/login", {
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(userData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!res.ok) {
-    throw Error("Failed to log in");
-  }
-  return res;
-};
+import { loginUser } from "../../api";
+import { useState } from "react";
 
 const Login = () => {
+  const [loginError, setLoginError] = useState("");
   const { t } = useTranslation();
   const {
     state: { isLoggedIn },
@@ -47,15 +34,14 @@ const Login = () => {
   });
 
   const onSubmit = async (userData) => {
+    setLoginError("");
     try {
       await loginUser(userData);
-    } catch (error) {
-      console.log(error);
-    } finally {
       dispatch({ type: LoginActions.LOGIN });
+    } catch (error) {
+      setLoginError(t(error.message));
     }
   };
-
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -75,7 +61,6 @@ const Login = () => {
             type="submit"
             variant="contained"
             onClick={() => dispatch({ type: LoginActions.LOGOUT })}
-
           >
             {t("login.logout")}
           </Button>
@@ -134,6 +119,7 @@ const Login = () => {
                 })}
               </Alert>
             )}
+            {loginError && <Alert severity="error">{loginError}</Alert>}
             <Button type="submit" variant="contained">
               {t("login.login")}
             </Button>

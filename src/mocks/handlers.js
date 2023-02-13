@@ -1,12 +1,19 @@
 import { rest } from "msw";
 
 export const handlers = [
-  rest.post("http://localhost:8080/login", async (req, res, ctx) => {
-    console.log(req);
+  rest.post("/login", async (req, res, ctx) => {
+    const userData = await req.json();
 
-    return res(
-      ctx.delay(1000), //simulate API response delay
-      ctx.status(200)
-    );
+    if (userData.username === "invalid") {
+      return res(
+        ctx.delay(1000), //simulate API response delay
+        ctx.status(400)
+      );
+    } else {
+      return res(
+        ctx.delay(1000), //simulate API response delay
+        ctx.status(200)
+      );
+    }
   }),
 ];
