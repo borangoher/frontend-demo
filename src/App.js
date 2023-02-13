@@ -4,7 +4,7 @@ import Home from "./components/Home.js";
 import PaymentForm from "./components/payment-form/PaymentForm.js";
 import Login from "./components/login/Login.js";
 import Info from "./components/Info.js";
-import { LoginProvider } from "./components/LoginContext.js";
+import { LoginProvider } from "./components/LoginContext.tsx";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";

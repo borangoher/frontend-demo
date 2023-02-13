@@ -7,7 +7,7 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useLogin, LoginActions } from "../LoginContext";
+import { useLogin } from "../LoginContext.tsx";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
@@ -37,7 +37,7 @@ const Login = () => {
     setLoginError("");
     try {
       await loginUser(userData);
-      dispatch({ type: LoginActions.LOGIN });
+      dispatch({ type: "log in" });
     } catch (error) {
       setLoginError(t(error.message));
     }
@@ -60,7 +60,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => dispatch({ type: LoginActions.LOGOUT })}
+            onClick={() => dispatch({ type: "log out" })}
           >
             {t("login.logout")}
           </Button>
