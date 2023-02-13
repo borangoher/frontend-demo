@@ -32,16 +32,11 @@ const Login = () => {
   });
 
   const onSubmit = async (userData) => {
-    var invalidLogin = false;
-
     try {
       await loginUser(userData);
+      dispatch({ type: LoginActions.LOGIN });
     } catch (error) {
       alert(t(error.message));
-      invalidLogin = true;
-    }
-    if (!invalidLogin) {
-      dispatch({ type: LoginActions.LOGIN });
     }
   };
 

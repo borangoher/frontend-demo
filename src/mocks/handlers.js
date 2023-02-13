@@ -2,7 +2,7 @@ import { rest } from "msw";
 
 export const handlers = [
   rest.post("/login", async (req, res, ctx) => {
-    const userData = await req.json().then();
+    const userData = await req.json();
 
     if (userData.username === "invalid") {
       return res(
