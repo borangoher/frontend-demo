@@ -14,8 +14,10 @@ import { schema } from "./Login.validation";
 import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
 import { loginUser } from "../../api";
+import { useState } from "react";
 
 const Login = () => {
+  const [loginError, setLoginError] = useState("");
   const { t } = useTranslation();
   const {
     state: { isLoggedIn },
@@ -32,11 +34,12 @@ const Login = () => {
   });
 
   const onSubmit = async (userData) => {
+    setLoginError("");
     try {
       await loginUser(userData);
       dispatch({ type: LoginActions.LOGIN });
     } catch (error) {
-      alert(t(error.message));
+      setLoginError(t(error.message));
     }
   };
 
@@ -116,6 +119,7 @@ const Login = () => {
                 })}
               </Alert>
             )}
+            {loginError && <Alert severity="error">{loginError}</Alert>}
             <Button type="submit" variant="contained">
               {t("login.login")}
             </Button>
