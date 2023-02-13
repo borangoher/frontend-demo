@@ -16,3 +16,15 @@ export const paymentFormDefaultValues = {
   useService: false,
   transferTime: "now",
 };
+
+export interface FormProps {
+  cardholderName: string,
+  cardNumber: number | null,
+  expiryDate: Date | null,
+  securityNumber: number | null,
+  accountNumber: number | null,
+  amount: number | null,
+  displaySenderName: boolean,
+  useService: boolean,
+  transferTime: string,
+}

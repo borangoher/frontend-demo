@@ -1,14 +1,14 @@
 import * as yup from "yup";
-import { ValidLengths } from "./paymentForm.constant";
+import { ValidLengths, FormProps } from "./paymentForm.constant";
 
-const schema = yup.object({
+const schema: yup.SchemaOf<FormProps> = yup.object({
   cardholderName: yup
     .string()
     .min(
       ValidLengths.MIN_CARDHOLDER_NAME_LENGTH,
       "payment.errorMessages.cardholderNameMin"
     )
-    .required("payment.errorMessages.required"),
+    .required("payment.errorMessages.required").default(""),
   cardNumber: yup
     .number()
     .positive()
@@ -17,11 +17,11 @@ const schema = yup.object({
       "payment.errorMessages.cardNumberLength",
       (val) => val !== (0||undefined) && val.toString().length === ValidLengths.CARD_NUMBER_LENGTH
     )
-    .required("payment.errorMessages.required"),
+    .required("payment.errorMessages.required").default(null),
   expiryDate: yup
     .date()
     .min(new Date(), "payment.errorMessages.expiryDateMin")
-    .required(),
+    .required().default(null),
   securityNumber: yup
     .number()
     .positive()
@@ -31,7 +31,7 @@ const schema = yup.object({
       (val) =>
         val !== (0||undefined) && val.toString().length === ValidLengths.SECURITY_NUMBER_LENGTH
     )
-    .required("payment.errorMessages.required"),
+    .required("payment.errorMessages.required").default(null),
   accountNumber: yup
     .number()
     .positive()
@@ -41,16 +41,16 @@ const schema = yup.object({
       (val) =>
         val !== (0||undefined) && val.toString().length === ValidLengths.ACCOUNT_NUMBER_LENGTH
     )
-    .required("payment.errorMessages.required"),
+    .required("payment.errorMessages.required").default(null),
   amount: yup
     .number()
     .positive()
-    .max(25000, "payment.errorMessages.amountMax"),
-  displaySenderName: yup.boolean(),
+    .max(25000, "payment.errorMessages.amountMax").default(null),
+  displaySenderName: yup.boolean().default(false),
   useService: yup
     .boolean()
-    .oneOf([true], "payment.errorMessages.serviceAgreement"),
-  transferTime: yup.string(),
+    .oneOf([true], "payment.errorMessages.serviceAgreement").default(false),
+  transferTime: yup.string().default(""),
 });
 
 export default schema;

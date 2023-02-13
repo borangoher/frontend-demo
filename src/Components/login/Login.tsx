@@ -7,11 +7,11 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useLogin } from "../LoginContext";
+import { LoginActionState, useLogin } from "../LoginContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
-import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
+import { FormProps, loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
 import { loginUser } from "../../api";
 import { useState } from "react";
@@ -33,11 +33,11 @@ const Login = () => {
     defaultValues: loginDefaultValues,
   });
 
-  const onSubmit = async (userData: object) => {
+  const onSubmit = async (userData: FormProps) => {
     setLoginError("");
     try {
       await loginUser(userData);
-      dispatch({ type: "log in" });
+      dispatch({ type: LoginActionState.LOGIN });
     } catch (error) {
       if (error instanceof Error) {
       setLoginError(`${t(error.message)}`);
@@ -64,7 +64,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => dispatch({ type: "log out" })}
+            onClick={() => dispatch({ type: LoginActionState.LOGOUT })}
           >
             {t("login.logout")}
           </Button>

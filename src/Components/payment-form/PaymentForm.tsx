@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./paymentForm.validation";
-import { paymentFormDefaultValues, ValidLengths } from "./paymentForm.constant";
+import { FormProps, paymentFormDefaultValues, ValidLengths } from "./paymentForm.constant";
 import { useTranslation } from "react-i18next";
 
 const PaymentForm = () => {
@@ -33,11 +33,11 @@ const PaymentForm = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
+  } = useForm<FormProps>({
     resolver: yupResolver(schema),
     defaultValues: paymentFormDefaultValues,
   });
-  const onSubmit = (data: object) => console.log(data);
+  const onSubmit = (data: FormProps) => console.log(data);
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
