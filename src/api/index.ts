@@ -1,4 +1,4 @@
-export const loginUser = async (userData) => {
+export const loginUser = async (userData: object) => {
   const response = await fetch("/login", {
     method: "POST",
     mode: "cors",

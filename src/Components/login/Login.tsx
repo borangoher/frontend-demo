@@ -7,7 +7,7 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useLogin } from "../LoginContext.tsx";
+import { useLogin } from "../LoginContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
@@ -33,13 +33,17 @@ const Login = () => {
     defaultValues: loginDefaultValues,
   });
 
-  const onSubmit = async (userData) => {
+  const onSubmit = async (userData: object) => {
     setLoginError("");
     try {
       await loginUser(userData);
       dispatch({ type: "log in" });
     } catch (error) {
-      setLoginError(t(error.message));
+      if (error instanceof Error) {
+      setLoginError(`${t(error.message)}`);
+      } else {
+        console.log("Unknown Error", error)
+      }
     }
   };
 
@@ -82,7 +86,6 @@ const Login = () => {
                 <TextField
                   onChange={onChange}
                   onBlur={onBlur}
-                  selected={value}
                   required
                   type="text"
                   label={t("login.username")}
@@ -91,10 +94,10 @@ const Login = () => {
             />
             {errors.username && (
               <Alert severity="error">
-                {t(errors.username.message, {
+                {`${t(errors.username.message as string, {
                   minLength: ValidLengthLimits.MIN_USERNAME_LENGTH,
                   maxLength: ValidLengthLimits.MAX_USERNAME_LENGTH,
-                })}
+                })}`}
               </Alert>
             )}
             <Controller
@@ -104,7 +107,6 @@ const Login = () => {
                 <TextField
                   onChange={onChange}
                   onBlur={onBlur}
-                  selected={value}
                   required
                   type="text"
                   label={t("login.password")}
@@ -113,10 +115,10 @@ const Login = () => {
             />
             {errors.password && (
               <Alert severity="error">
-                {t(errors.password.message, {
+                {`${t(errors.password.message as string, {
                   minLength: ValidLengthLimits.MIN_PASSWORD_LENGTH,
                   maxLength: ValidLengthLimits.MAX_PASSWORD_LENGTH,
-                })}
+                })}`}
               </Alert>
             )}
             {loginError && <Alert severity="error">{loginError}</Alert>}
