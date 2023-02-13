@@ -1,5 +1,5 @@
-import { Typography, Container, Box } from "@mui/material";
 import React from "react";
+import { Typography, Container, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const Info = () => {

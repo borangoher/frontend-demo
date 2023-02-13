@@ -1,7 +1,7 @@
+import React  from "react";
 import { Button, Container, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
-import React  from "react";
 import { useLogin } from "./LoginContext";
 
 const Home = () => {
