@@ -10,12 +10,12 @@ const schema = yup.object({
     )
     .required("payment.errorMessages.required"),
   cardNumber: yup
-    .number("payment.errorMessages.cardNumberType")
+    .number()
     .positive()
     .test(
       "len",
       "payment.errorMessages.cardNumberLength",
-      (val) => val && val.toString().length === ValidLengths.CARD_NUMBER_LENGTH
+      (val) => val !== (0||undefined) && val.toString().length === ValidLengths.CARD_NUMBER_LENGTH
     )
     .required("payment.errorMessages.required"),
   expiryDate: yup
@@ -23,34 +23,34 @@ const schema = yup.object({
     .min(new Date(), "payment.errorMessages.expiryDateMin")
     .required(),
   securityNumber: yup
-    .number("payment.errorMessages.securityNumberType")
+    .number()
     .positive()
     .test(
       "len",
       "payment.errorMessages.securityNumberType",
       (val) =>
-        val && val.toString().length === ValidLengths.SECURITY_NUMBER_LENGTH
+        val !== (0||undefined) && val.toString().length === ValidLengths.SECURITY_NUMBER_LENGTH
     )
     .required("payment.errorMessages.required"),
   accountNumber: yup
-    .number("payment.errorMessages.accountNumberType")
+    .number()
     .positive()
     .test(
       "len",
       "payment.errorMessages.accountNumberLength",
       (val) =>
-        val && val.toString().length === ValidLengths.ACCOUNT_NUMBER_LENGTH
+        val !== (0||undefined) && val.toString().length === ValidLengths.ACCOUNT_NUMBER_LENGTH
     )
     .required("payment.errorMessages.required"),
   amount: yup
-    .number("payment.errorMessages.amountType")
+    .number()
     .positive()
     .max(25000, "payment.errorMessages.amountMax"),
   displaySenderName: yup.boolean(),
   useService: yup
     .boolean()
     .oneOf([true], "payment.errorMessages.serviceAgreement"),
-  transferTime: yup.string("payment.errorMessages.noOptionSelected"),
+  transferTime: yup.string(),
 });
 
 export default schema;

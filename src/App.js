@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.tsx";
 import Home from "./components/Home.tsx";
-import PaymentForm from "./components/payment-form/PaymentForm.js";
+import PaymentForm from "./components/payment-form/PaymentForm.tsx";
 import Login from "./components/login/Login.tsx";
 import Info from "./components/Info.tsx";
 import { LoginProvider } from "./components/LoginContext.tsx";

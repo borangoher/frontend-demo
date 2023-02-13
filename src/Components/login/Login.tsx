@@ -94,10 +94,10 @@ const Login = () => {
             />
             {errors.username && (
               <Alert severity="error">
-                {`${t(errors.username.message as string, {
+                {t(errors.username.message as string, {
                   minLength: ValidLengthLimits.MIN_USERNAME_LENGTH,
                   maxLength: ValidLengthLimits.MAX_USERNAME_LENGTH,
-                })}`}
+                })}
               </Alert>
             )}
             <Controller
@@ -115,10 +115,10 @@ const Login = () => {
             />
             {errors.password && (
               <Alert severity="error">
-                {`${t(errors.password.message as string, {
+                {t(errors.password.message as string, {
                   minLength: ValidLengthLimits.MIN_PASSWORD_LENGTH,
                   maxLength: ValidLengthLimits.MAX_PASSWORD_LENGTH,
-                })}`}
+                })}
               </Alert>
             )}
             {loginError && <Alert severity="error">{loginError}</Alert>}
