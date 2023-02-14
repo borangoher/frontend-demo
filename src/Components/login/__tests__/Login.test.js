@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import Login from "../../login/Login";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
+import server from "../../../mocks/server";
+import { rest } from "msw";
 
 const MockLogin = () => {
   return (
@@ -88,7 +90,16 @@ it("should log user out when pressing log out button", async () => {
   ).toBeInTheDocument();
 });
 
-it("should display appropriate error for invalid auth", async () => {
+it("should display appropriate error on status 401", async () => {
+  server.use(
+    rest.post("/login", async (req, res, ctx) => {
+      await req.json();
+      return res(
+        ctx.delay(100), //simulate API response delay
+        ctx.status(401)
+      );
+    })
+  );
   const user = userEvent.setup();
   render(<MockLogin />);
 
@@ -96,9 +107,9 @@ it("should display appropriate error for invalid auth", async () => {
   const passwordElement = screen.getByLabelText(/login.password/i);
   const loginButton = screen.getByRole("button", { value: /login.login/i });
 
-  await user.type(usernameElement, "invalid");
+  await user.type(usernameElement, "abcde");
   await user.type(passwordElement, "abcdefghj");
-  await user.click(loginButton);
+  await user.click(loginButton); //should return 401 despite correct creds
 
   expect(
     await screen.findByText(/login.errorMessages.invalidAuth/i)
