@@ -11,7 +11,12 @@ const LoginContext = createContext<{
   dispatch: React.Dispatch<LoginAction>
 }>({state: initialState, dispatch: () => {}});
 
-type LoginAction = {type: "log in"} | {type: "log out"};
+export enum LoginActionState {
+  LOGIN,
+  LOGOUT,
+}
+
+type LoginAction = {type: LoginActionState};
 
 
 interface LoginContextProvider  {
@@ -20,10 +25,10 @@ interface LoginContextProvider  {
 
 function loginReducer(state: AppState, action: LoginAction) {
   switch (action.type) {
-    case "log in": {
+    case LoginActionState.LOGIN: {
       return { isLoggedIn: true };
     }
-    case "log out": {
+    case LoginActionState.LOGOUT: {
       return { isLoggedIn: false };
     }
     default: {
