@@ -8,7 +8,7 @@ const schema: yup.SchemaOf<FormProps> = yup.object({
       ValidLengths.MIN_CARDHOLDER_NAME_LENGTH,
       "payment.errorMessages.cardholderNameMin"
     )
-    .required("payment.errorMessages.required").default(""),
+    .required("payment.errorMessages.required"),
   cardNumber: yup
     .number()
     .positive()
@@ -17,7 +17,7 @@ const schema: yup.SchemaOf<FormProps> = yup.object({
       "payment.errorMessages.cardNumberLength",
       (val) => val !== (0||undefined) && val.toString().length === ValidLengths.CARD_NUMBER_LENGTH
     )
-    .required("payment.errorMessages.required").default(null),
+    .required("payment.errorMessages.required"),
   expiryDate: yup
     .date()
     .min(new Date(), "payment.errorMessages.expiryDateMin")
@@ -31,7 +31,7 @@ const schema: yup.SchemaOf<FormProps> = yup.object({
       (val) =>
         val !== (0||undefined) && val.toString().length === ValidLengths.SECURITY_NUMBER_LENGTH
     )
-    .required("payment.errorMessages.required").default(null),
+    .required("payment.errorMessages.required"),
   accountNumber: yup
     .number()
     .positive()
@@ -41,7 +41,7 @@ const schema: yup.SchemaOf<FormProps> = yup.object({
       (val) =>
         val !== (0||undefined) && val.toString().length === ValidLengths.ACCOUNT_NUMBER_LENGTH
     )
-    .required("payment.errorMessages.required").default(null),
+    .required("payment.errorMessages.required"),
   amount: yup
     .number()
     .positive()
