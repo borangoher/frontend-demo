@@ -30,11 +30,7 @@ it("should display an error for invalid cardholder name", async () => {
   await user.type(passwordElement, "abcdefghj");
   await user.click(loginButton); //changes isLoggedIn context to true
 
-  await waitFor(() => {
-    expect(
-      screen.getByLabelText(/payment.cardholderName/i)
-    ).toBeInTheDocument();
-  });
+  await waitFor(() => screen.findByLabelText(/cardholderName/i));
 
   const cardholderNameElement = screen.getByLabelText(/cardholderName/i);
   const cardNumberElement = screen.getByLabelText(/cardNumber/i);
