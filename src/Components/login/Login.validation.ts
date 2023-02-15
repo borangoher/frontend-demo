@@ -1,7 +1,7 @@
 import * as yup from "yup";
-import { ValidLengthLimits } from "./Login.constant";
+import { FormProps, ValidLengthLimits } from "./Login.constant";
 
-export const schema = yup.object({
+export const schema: yup.SchemaOf<FormProps> = yup.object({
   username: yup
     .string()
     .min(
@@ -11,7 +11,7 @@ export const schema = yup.object({
     .max(
       ValidLengthLimits.MAX_USERNAME_LENGTH,
       "login.errorMessages.usernameLength"
-    ),
+    ).default(""),
   password: yup
     .string()
     .min(
@@ -21,5 +21,5 @@ export const schema = yup.object({
     .max(
       ValidLengthLimits.MAX_PASSWORD_LENGTH,
       "login.errorMessages.passwordLength"
-    ),
+    ).default(""),
 });

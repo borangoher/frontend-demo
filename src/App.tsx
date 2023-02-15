@@ -1,10 +1,11 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar.js";
-import Home from "./components/Home.js";
-import PaymentForm from "./components/payment-form/PaymentForm.js";
-import Login from "./components/login/Login.js";
-import Info from "./components/Info.js";
-import { LoginProvider } from "./components/LoginContext.js";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import PaymentForm from "./components/payment-form/PaymentForm";
+import Login from "./components/login/Login";
+import Info from "./components/Info";
+import { LoginProvider } from "./components/LoginContext";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";

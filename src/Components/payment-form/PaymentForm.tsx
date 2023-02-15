@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { useLogin } from "../LoginContext";
 import {
   Container,
@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./paymentForm.validation";
-import { paymentFormDefaultValues, ValidLengths } from "./paymentForm.constant";
+import { FormProps, paymentFormDefaultValues, ValidLengths } from "./paymentForm.constant";
 import { useTranslation } from "react-i18next";
 
 const PaymentForm = () => {
@@ -33,11 +33,11 @@ const PaymentForm = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
+  } = useForm<FormProps>({
     resolver: yupResolver(schema),
     defaultValues: paymentFormDefaultValues,
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: FormProps) => console.log(data);
 
   return (
     <Container maxWidth="md" sx={{ justifyContent: "center" }}>
@@ -61,7 +61,6 @@ const PaymentForm = () => {
                       <TextField
                         onChange={onChange}
                         onBlur={onBlur}
-                        selected={value}
                         required
                         type="text"
                         label={t("payment.cardholderName")}
@@ -70,7 +69,7 @@ const PaymentForm = () => {
                   />
                   {errors.cardholderName && (
                     <Alert severity="error">
-                      {t(errors.cardholderName.message, {
+                      {t(errors.cardholderName.message as string, {
                         minLength: ValidLengths.MIN_CARDHOLDER_NAME_LENGTH,
                       })}
                     </Alert>
@@ -84,7 +83,6 @@ const PaymentForm = () => {
                       <TextField
                         onChange={onChange}
                         onBlur={onBlur}
-                        selected={value}
                         required
                         type="number"
                         label={t("payment.cardNumber")}
@@ -93,7 +91,7 @@ const PaymentForm = () => {
                   />
                   {errors.cardNumber && (
                     <Alert severity="error">
-                      {t(errors.cardNumber.message, {
+                      {t(errors.cardNumber.message as string, {
                         length: ValidLengths.CARD_NUMBER_LENGTH,
                       })}
                     </Alert>
@@ -107,7 +105,6 @@ const PaymentForm = () => {
                       <TextField
                         onChange={onChange}
                         onBlur={onBlur}
-                        selected={value}
                         required
                         type="date"
                         label={t("payment.expiryDate")}
@@ -116,7 +113,7 @@ const PaymentForm = () => {
                   />
                   {errors.expiryDate && (
                     <Alert severity="error">
-                      {t(errors.expiryDate.message)}
+                      {t(errors.expiryDate.message as string)}
                     </Alert>
                   )}
                 </Grid>
@@ -128,7 +125,6 @@ const PaymentForm = () => {
                       <TextField
                         onChange={onChange}
                         onBlur={onBlur}
-                        selected={value}
                         required
                         type="number"
                         label={t("payment.securityNumber")}
@@ -137,7 +133,7 @@ const PaymentForm = () => {
                   />
                   {errors.securityNumber && (
                     <Alert severity="error">
-                      {t(errors.securityNumber.message, {
+                      {t(errors.securityNumber.message as string, {
                         length: ValidLengths.SECURITY_NUMBER_LENGTH,
                       })}
                     </Alert>
@@ -151,7 +147,6 @@ const PaymentForm = () => {
                       <TextField
                         onChange={onChange}
                         onBlur={onBlur}
-                        selected={value}
                         required
                         type="number"
                         label={t("payment.accountNumber")}
@@ -160,7 +155,7 @@ const PaymentForm = () => {
                   />
                   {errors.accountNumber && (
                     <Alert severity="error">
-                      {t(errors.accountNumber.message, {
+                      {t(errors.accountNumber.message as string, {
                         length: ValidLengths.ACCOUNT_NUMBER_LENGTH,
                       })}
                     </Alert>
@@ -174,7 +169,6 @@ const PaymentForm = () => {
                       <TextField
                         onChange={onChange}
                         onBlur={onBlur}
-                        selected={value}
                         required
                         type="number"
                         label={t("payment.amount")}
@@ -182,7 +176,7 @@ const PaymentForm = () => {
                     )}
                   />
                   {errors.amount && (
-                    <Alert severity="error">{t(errors.amount.message)}</Alert>
+                    <Alert severity="error">{t(errors.amount.message as string)}</Alert>
                   )}
                 </Grid>
               </Grid>
@@ -196,7 +190,6 @@ const PaymentForm = () => {
                         <Checkbox
                           onChange={onChange}
                           onBlur={onBlur}
-                          selected={value}
                         />
                       }
                       label={t("payment.displaySenderName")}
@@ -212,7 +205,6 @@ const PaymentForm = () => {
                         <Checkbox
                           onChange={onChange}
                           onBlur={onBlur}
-                          selected={value}
                         />
                       }
                       label={t("payment.useService")}
@@ -220,7 +212,7 @@ const PaymentForm = () => {
                   )}
                 />
                 {errors.useService && (
-                  <Alert severity="error">{t(errors.useService.message)}</Alert>
+                  <Alert severity="error">{t(errors.useService.message as string)}</Alert>
                 )}
               </FormGroup>
               <FormControl>

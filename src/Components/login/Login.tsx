@@ -7,11 +7,11 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useLogin, LoginActions } from "../LoginContext";
+import { LoginActionState, useLogin } from "../LoginContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./Login.validation";
-import { loginDefaultValues, ValidLengthLimits } from "./Login.constant";
+import { FormProps, loginDefaultValues, ValidLengthLimits } from "./Login.constant";
 import { useTranslation } from "react-i18next";
 import { loginUser } from "../../api";
 import { useState } from "react";
@@ -33,13 +33,17 @@ const Login = () => {
     defaultValues: loginDefaultValues,
   });
 
-  const onSubmit = async (userData) => {
+  const onSubmit = async (userData: FormProps) => {
     setLoginError("");
     try {
       await loginUser(userData);
-      dispatch({ type: LoginActions.LOGIN });
+      dispatch({ type: LoginActionState.LOGIN });
     } catch (error) {
-      setLoginError(t(error.message));
+      if (error instanceof Error) {
+      setLoginError(`${t(error.message)}`);
+      } else {
+        console.log("Unknown Error", error)
+      }
     }
   };
 
@@ -60,7 +64,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => dispatch({ type: LoginActions.LOGOUT })}
+            onClick={() => dispatch({ type: LoginActionState.LOGOUT })}
           >
             {t("login.logout")}
           </Button>
@@ -82,7 +86,6 @@ const Login = () => {
                 <TextField
                   onChange={onChange}
                   onBlur={onBlur}
-                  selected={value}
                   required
                   type="text"
                   label={t("login.username")}
@@ -91,7 +94,7 @@ const Login = () => {
             />
             {errors.username && (
               <Alert severity="error">
-                {t(errors.username.message, {
+                {t(errors.username.message as string, {
                   minLength: ValidLengthLimits.MIN_USERNAME_LENGTH,
                   maxLength: ValidLengthLimits.MAX_USERNAME_LENGTH,
                 })}
@@ -104,7 +107,6 @@ const Login = () => {
                 <TextField
                   onChange={onChange}
                   onBlur={onBlur}
-                  selected={value}
                   required
                   type="text"
                   label={t("login.password")}
@@ -113,7 +115,7 @@ const Login = () => {
             />
             {errors.password && (
               <Alert severity="error">
-                {t(errors.password.message, {
+                {t(errors.password.message as string, {
                   minLength: ValidLengthLimits.MIN_PASSWORD_LENGTH,
                   maxLength: ValidLengthLimits.MAX_PASSWORD_LENGTH,
                 })}

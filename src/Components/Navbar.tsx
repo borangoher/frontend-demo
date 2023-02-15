@@ -9,7 +9,16 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const lngs = {
+interface Language {
+  nativeName: string;
+}
+
+interface Languages {
+  en: Language,
+  tr: Language,
+}
+
+const lngs: Languages = {
   en: { nativeName: "English" },
   tr: { nativeName: "Türkçe" },
 };
@@ -40,7 +49,7 @@ const Navbar = () => {
               type="submit"
               onClick={() => i18n.changeLanguage(lng)}
             >
-              {lngs[lng].nativeName}
+              {lngs[lng as keyof Languages].nativeName}
             </Button>
           ))}
           <Button component={Link} to="/login" color="inherit">
